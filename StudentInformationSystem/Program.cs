@@ -11,18 +11,15 @@ namespace StudentInformationSystem
 
             // save the name in MyName vairable of string.
             string MyName = Console.ReadLine();
+            
+            // we use substring from index 0 till the space index to get the first name... eg: John Smith-Ahmed, spaceIndex = 4, subString 0-4 = "John"
+            string FirstName = ExtractFirstName(MyName);
+
+            // the rest of the string is surname so anything after the space index is surname. eg: "Smith-Ahmed"
+            string Surname = ExtractSurname(MyName);
 
             // get the student id.
             int MyId = GetStudentId();
-
-            // we know that first name and surname are separated by space ' ' - the ASCII code for space is 32
-            int spaceIndex = MyName.IndexOf(' ');
-
-            // we use substring from index 0 till the space index to get the first name... eg: John Smith-Ahmed, spaceIndex = 4, subString 0-4 = "John"
-            string FirstName = MyName.Substring(0, spaceIndex);
-
-            // the rest of the string is surname so anything after the space index is surname. eg: "Smith-Ahmed"
-            string Surname = MyName.Substring(spaceIndex);
 
             // once we have surname and student id, we can now allocate the stream.
             string stream = AllocateStreams(Surname, MyId);
@@ -42,6 +39,49 @@ namespace StudentInformationSystem
             Console.WriteLine("Student ID\t\t\tFirst Name\t\t\tFamily Name\t\t\tStream\n");
             Console.WriteLine("================================================================================\n");
             Console.WriteLine("{0}\t\t\t{1}\t\t\t{2}\t\t\t{3}", studentId,firstName, surname, stream);
+        }
+
+        // we need the build the surname by skipping all the chars before the first space
+        // and add all the rest to make surname.
+        static string ExtractSurname(string fullName)
+        {
+            string surname = "";
+            int spaceIndex = 0;
+            for (int i = 0; i < fullName.Length; i++)
+            {
+                // we know that first name and surname are separated by space ' ' - the ASCII code for space is 32
+                if (fullName[i] == 32)
+                {
+                    spaceIndex = i;
+                    break;
+                }
+            }
+
+            for (int i = spaceIndex; i < fullName.Length; i++)
+            {
+                surname += fullName[i];
+            }
+
+            return surname;
+
+        }
+
+        // we need to construct first name by adding all the chars from the start of the fullName string
+        // till we hit the space char.
+        static string ExtractFirstName(string fullName)
+        {
+            string firstName = "";
+            for (int i = 0; i < fullName.Length; i++)
+            {
+                if (fullName[i] == 32)
+                {
+                    // we know that first name and surname are separated by space ' ' - the ASCII code for space is 32
+                    break;
+                }
+                firstName += fullName[i];
+            }
+
+            return firstName;
         }
 
         static int GetStudentId()

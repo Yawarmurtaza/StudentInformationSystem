@@ -2,7 +2,7 @@
 
 namespace StudentInformationSystem
 {
-    public class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -57,7 +57,8 @@ namespace StudentInformationSystem
                 }
             }
 
-            for (int i = spaceIndex; i < fullName.Length; i++)
+            // spaceIndex is where the space is, we need to +1 to this so that we can start adding the next char after the space.
+            for (int i = spaceIndex + 1; i < fullName.Length; i++)
             {
                 surname += fullName[i];
             }
@@ -121,19 +122,19 @@ namespace StudentInformationSystem
             char firstLetterSurname = surname[0];
 
             // Condition 1:
-            if (firstLetterSurname >= 'A' && firstLetterSurname <= 'N' && last2Digits < 50)
+            if (firstLetterSurname >= 65 && firstLetterSurname <= 79 && last2Digits < 50)
             {
                 return "Stream 20";
             }
 
             // Condition 2:
-            if (firstLetterSurname >= 'A' && firstLetterSurname <= 'N' && last2Digits >= 50)
+            if (firstLetterSurname >= 65 && firstLetterSurname <= 79 && last2Digits >= 50)
             {
                 return "Stream 21";
             }
 
             // Condition 3:
-            if (firstLetterSurname >= 'O' && last2Digits < 50)
+            if (firstLetterSurname >= 80 && last2Digits < 50)
             {
                 return "Stream 22";
             }

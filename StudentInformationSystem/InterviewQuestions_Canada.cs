@@ -1,7 +1,5 @@
 ﻿namespace StudentInformationSystem
 {
-    using System.ComponentModel;
-
     public class InterviewQuestions_Canada
     {
         public int FindOneRepeatingNumberInAConsecutiveSequence(int[] arr)
